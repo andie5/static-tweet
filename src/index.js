@@ -53,7 +53,7 @@ const RetweetButton = () => <i className="fa fa-retweet retweet-button" />;
 const LikeButton = () => <i className="fa fa-heart like-button" />;
 
 const MoreOptionsButton = () => (
-  <i className="fa fa ellipsis-h more-options-button" />
+  <i className="fa fa-ellipsis-h more-options-button" />
 );
 
 ReactDOM.render(<Tweet />, document.querySelector("#root"));
