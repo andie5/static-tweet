@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import moment from "moment";
+import PropTypes from "prop-types";
 
 // add the { tweet } prop destructured
 function Tweet({ tweet }) {
@@ -23,7 +24,7 @@ function Tweet({ tweet }) {
   );
 }
 
-function getRetweetCount(count) {
+function Count({ count }) {
   if (count > 0) {
     return <span className="retweet-count">{count}</span>;
   } else {
@@ -60,20 +61,30 @@ const ReplyButton = () => <i className="fa fa-reply reply-button" />;
 const RetweetButton = ({ count }) => (
   <span className="retweet-button">
     <i className="fa fa-retweet" />
-    {getRetweetCount(count)}
+    <Count count={count} />
   </span>
 );
 
 const LikeButton = ({ count }) => (
   <span className="like-button">
     <i className="fa fa-heart" />
-    {count > 0 && <span className="like-count">{count}</span>}
+    <span className="like-count">{count ? count : null}</span>
   </span>
 );
 
 const MoreOptionsButton = () => (
   <i className="fa fa-ellipsis-h more-options-button" />
 );
+
+function Comment({ author, message, likes }) {
+  return (
+    <div>
+      <div className="author">{author}</div>
+      <div className="message">{message}</div>
+      <div className="likes">{likes > 0 ? likes : "No"} likes</div>
+    </div>
+  );
+}
 
 const testTweet = {
   message: "Something about fish",
@@ -87,4 +98,22 @@ const testTweet = {
   timestamp: "2019-07-30 21:24:30"
 };
 
-ReactDOM.render(<Tweet tweet={testTweet} />, document.querySelector("#root"));
+Comment.propTypes = {
+  message: PropTypes.string.isRequired,
+  author: PropTypes.string.isRequired,
+  likes: PropTypes.number
+};
+
+// ReactDOM.render(<Tweet tweet={testTweet} />, document.querySelector("#root"));
+{
+  /* <Comment author={"somebody"} message="a likeable person" likes={1} />
+<Comment author="mr popular" message="unlikeable person" />
+<Comment author="mr popular" message="another message" likes={0} /> 
+<Comment author="error missing message"  />
+<Comment message="missing author"  />  */
+}
+
+ReactDOM.render(
+  <Comment message="missing author" />,
+  document.querySelector("#root")
+);
