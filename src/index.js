@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import moment from "moment";
 
+// add the { tweet } prop destructured
 function Tweet({ tweet }) {
   return (
     <div className="tweet">
@@ -20,6 +21,14 @@ function Tweet({ tweet }) {
       </div>
     </div>
   );
+}
+
+function getRetweetCount(count) {
+  if (count > 0) {
+    return <span className="retweet-count">{count}</span>;
+  } else {
+    return null;
+  }
 }
 
 function Avatar({ hash }) {
@@ -49,10 +58,18 @@ const Time = ({ time }) => {
 const ReplyButton = () => <i className="fa fa-reply reply-button" />;
 
 const RetweetButton = ({ count }) => (
-  <i className="fa fa-retweet retweet-button" />
+  <span className="retweet-button">
+    <i className="fa fa-retweet" />
+    {getRetweetCount(count)}
+  </span>
 );
 
-const LikeButton = ({ count }) => <i className="fa fa-heart like-button" />;
+const LikeButton = ({ count }) => (
+  <span className="like-button">
+    <i className="fa fa-heart" />
+    {count > 0 && <span className="like-count">{count}</span>}
+  </span>
+);
 
 const MoreOptionsButton = () => (
   <i className="fa fa-ellipsis-h more-options-button" />
