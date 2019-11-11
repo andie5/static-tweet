@@ -104,7 +104,38 @@ Comment.propTypes = {
   likes: PropTypes.number
 };
 
-// ReactDOM.render(<Tweet tweet={testTweet} />, document.querySelector("#root"));
+LikeButton.propTypes = {
+  count: PropTypes.number
+};
+
+RetweetButton.propTypes = {
+  count: PropTypes.number
+};
+
+Message.propTypes = {
+  text: PropTypes.string
+};
+
+Time.propTypes = {
+  time: PropTypes.string
+};
+
+Author.propTypes = {
+  author: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    handler: PropTypes.string.isRequired
+  }).isRequired
+};
+
+Avatar.propTypes = {
+  hash: PropTypes.string
+};
+
+Tweet.propTypes = {
+  tweet: PropTypes.object
+};
+
+ReactDOM.render(<Tweet tweet={testTweet} />, document.querySelector("#root"));
 {
   /* <Comment author={"somebody"} message="a likeable person" likes={1} />
 <Comment author="mr popular" message="unlikeable person" />
@@ -112,8 +143,3 @@ Comment.propTypes = {
 <Comment author="error missing message"  />
 <Comment message="missing author"  />  */
 }
-
-ReactDOM.render(
-  <Comment message="missing author" />,
-  document.querySelector("#root")
-);
